@@ -2,146 +2,193 @@
 import Base from '../layouts/Base.astro';
 import ServiceMap from '../components/ServiceMap.astro';
 import CtaBand from '../components/CtaBand.astro';
+import HeroVisual from '../components/viz/HeroVisual.astro';
+import TrustPanel from '../components/viz/TrustPanel.astro';
+import LtvChart from '../components/viz/LtvChart.astro';
+import BlockRegister from '../components/viz/BlockRegister.astro';
 import { services } from '../data/services';
 ---
 <Base title="compound." description="compound. is an ecommerce growth consultancy for mid-market brands scaling D2C in the UK and beyond. We find what’s holding growth back and build the change across the whole business.">
 
-  <!-- 1. Hero -->
+  <!-- Hero -->
   <section class="hero">
     <div class="wrap hero-inner">
-      <div class="stack-l">
-        <span class="label">Ecommerce growth consultancy</span>
-        <h1 class="display-xl">Small shifts. Big <span class="hl">reactions.</span></h1>
-        <p class="lead">compound. helps mid-market brands scaling D2C, in the UK and beyond, see what they’re too close to see. Then we build the change across the whole business, not just the boardroom.</p>
+      <div class="hero-copy stack-l">
+        <span class="eyebrow">Ecommerce growth consultancy</span>
+        <h1 class="display-xl">Small shifts.<br /><span class="serif-i">Big reactions<span class="dot">.</span></span></h1>
+        <p class="lead">We help mid-market brands scaling D2C, in the UK and beyond, see what they’re too close to see. Then we build the change across the whole business, not just the boardroom.</p>
         <div class="hero-act">
-          <a class="btn btn-primary" href="/book">Book a growth check</a>
-          <a class="btn btn-ghost" href="#how">See how we work</a>
+          <a class="btn btn-primary" href="/book">Book a growth check <span class="arr" aria-hidden="true">→</span></a>
+          <a class="btn btn-secondary" href="/approach">Our approach</a>
         </div>
+        <p class="hero-note"><span class="marker" data-stage="block"></span>Built on your Shopify, GA4 and ad platform data, from week one.</p>
       </div>
-      <div class="hero-art" aria-hidden="true">
-        <span class="mol mol-xl react">
-          <span class="n r1"></span><span class="b r2"></span><span class="n r2"></span><span class="b r3"></span><span class="k r3"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span>
-        </span>
-      </div>
+      <HeroVisual />
     </div>
   </section>
 
-  <!-- 2. The problem -->
+  <!-- Facts band -->
+  <section class="facts section-tight" aria-label="compound. at a glance">
+    <div class="wrap facts-grid">
+      <div><span class="f-num">2<small>weeks</small></span><p>From first call to a sized growth plan</p></div>
+      <div><span class="f-num">£</span><p>Every opportunity sized in pounds, not adjectives</p></div>
+      <div><span class="f-num">6</span><p>Connected services that strengthen each other</p></div>
+      <div><span class="f-num">1</span><p>Block register every team works from</p></div>
+    </div>
+  </section>
+
+  <!-- Problem -->
   <section class="section">
-    <div class="wrap grid-2">
-      <blockquote class="quote">
-        <p class="display-l">You’re too close to your business to see <span class="hl">what’s holding it back.</span> We aren’t.</p>
-      </blockquote>
-      <div class="stack-l">
-        <p class="lead">Most growing brands don’t lack ideas. They lack the outside view to see which ideas matter, and the connections to make them happen.</p>
+    <div class="wrap grid-2 problem">
+      <div class="stack-l reveal">
+        <span class="eyebrow">Why compound.</span>
+        <h2 class="display-l">You’re too close to your business to see <span class="hl">what’s holding it back.</span> We aren’t.</h2>
+      </div>
+      <div class="stack-m reveal">
+        <p class="lead">Most growing brands don’t lack ideas. They lack an outside view of which ideas matter, and the connections to make them happen.</p>
         <ul class="symptoms">
-          <li><strong>Growth has flattened.</strong> Traffic is up, but revenue and margin aren’t following.</li>
-          <li><strong>Teams pull in different directions.</strong> Marketing, ecommerce and operations each have their own numbers.</li>
-          <li><strong>Ideas stay in the deck.</strong> The strategy is agreed, but nothing changes on the shop floor.</li>
+          <li><span class="marker"></span><div><h4>Growth has flattened</h4><p class="muted">Traffic is up, but revenue and margin aren’t following.</p></div></li>
+          <li><span class="marker"></span><div><h4>Teams pull in different directions</h4><p class="muted">Marketing, ecommerce and operations each have their own numbers.</p></div></li>
+          <li><span class="marker"></span><div><h4>Ideas stay in the deck</h4><p class="muted">The strategy is agreed, but nothing changes on the shop floor.</p></div></li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- 3. nodes. bonds. blocks. -->
-  <section class="section" aria-labelledby="method-heading">
-    <div class="wrap stack-l">
-      <div class="stack">
-        <span class="label">How compound. works</span>
-        <h2 id="method-heading">nodes<span class="dot">.</span> bonds<span class="dot">.</span> blocks<span class="dot">.</span></h2>
-        <p class="lead">A compound is separate elements bonded into something stronger. That’s how we work with your business.</p>
+  <!-- Method -->
+  <section class="section section-tint" aria-labelledby="method-heading">
+    <div class="wrap">
+      <div class="section-head split">
+        <div class="stack-m">
+          <span class="eyebrow">Our approach</span>
+          <h2 id="method-heading">nodes<span class="dot">.</span> bonds<span class="dot">.</span> blocks<span class="dot">.</span></h2>
+        </div>
+        <p class="lead">A compound is separate elements bonded into something stronger. It’s how we work with your business, and why the results keep building.</p>
       </div>
-      <div class="grid-3 method">
-        <article class="panel" data-stage="node">
-          <span class="mol mol-l" aria-hidden="true"><span class="n"></span></span>
-          <h3>nodes.</h3>
-          <p>Your people, teams, data and ideas. We start by understanding each on its own terms, and by knowing which numbers to trust.</p>
+      <div class="grid-3">
+        <article class="card method-card reveal">
+          <div class="mc-art" data-stage="node"><span class="mol mol-l" aria-hidden="true"><span class="n"></span></span></div>
+          <span class="label">01 · Understand</span>
+          <h3>nodes<span class="dot">.</span></h3>
+          <p class="muted">Your people, teams, data and ideas. We understand each on its own terms, and score how far every number can be trusted.</p>
         </article>
-        <article class="panel" data-stage="bond">
-          <span class="mol mol-l" aria-hidden="true"><span class="n"></span><span class="b"></span><span class="n"></span></span>
-          <h3>bonds.</h3>
-          <p>The connections we make. We join up the data and bring the people who own each number around one plan.</p>
+        <article class="card method-card reveal">
+          <div class="mc-art" data-stage="bond"><span class="mol mol-l" aria-hidden="true"><span class="n"></span><span class="b"></span><span class="n"></span></span></div>
+          <span class="label">02 · Connect</span>
+          <h3>bonds<span class="dot">.</span></h3>
+          <p class="muted">We join up data that’s never been joined and bring the people who own each number around one plan.</p>
         </article>
-        <article class="panel" data-stage="block">
-          <span class="mol mol-l" aria-hidden="true"><span class="k"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>
-          <h3>blocks.</h3>
-          <p>What gets built: real changes, each with an owner, a date and a number to move. Every new bond makes them stronger.</p>
+        <article class="card method-card reveal">
+          <div class="mc-art" data-stage="block"><span class="mol mol-l" aria-hidden="true"><span class="k"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span></div>
+          <span class="label">03 · Build</span>
+          <h3>blocks<span class="dot">.</span></h3>
+          <p class="muted">Real changes, each with an owner, a date and a number to move. Every new bond makes them stronger.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- 4. Services -->
-  <section class="section" aria-labelledby="services-heading">
-    <div class="wrap stack-l">
-      <div class="stack">
-        <span class="label">Services</span>
-        <h2 id="services-heading">Six services. One system.</h2>
-        <p class="lead">Each service is built node, bond, block. Each one makes the others stronger, so the more you connect, the more it compounds.</p>
+  <!-- The diagnostic -->
+  <section class="section" aria-labelledby="diag-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">The diagnostic</span>
+        <h2 id="diag-heading">Evidence first. Opinions second.</h2>
+        <p class="lead">Every engagement starts with the same structured diagnostic, so you see what we see, and how sure we are about it.</p>
       </div>
-      <div class="elements">
+      <div class="feature reveal">
+        <div class="stack-m">
+          <span class="chip" data-stage="node"><span class="marker"></span>node.</span>
+          <h3 class="h2">Trust before insight</h3>
+          <p class="lead">We grade every data source and every connection between them before we draw a single conclusion. Findings built on weak data are flagged, not hidden.</p>
+        </div>
+        <div class="card viz"><span class="example-tag">Example data</span><TrustPanel /></div>
+      </div>
+      <div class="feature flip reveal">
+        <div class="stack-m">
+          <span class="chip" data-stage="bond"><span class="marker" data-stage="bond"></span>bond.</span>
+          <h3 class="h2">Connect what nobody has connected</h3>
+          <p class="lead">Margin joined to marketing. Customers joined to products. That’s where the real answers are, like discovering a discount that wins customers who never come back.</p>
+        </div>
+        <div class="card viz"><span class="example-tag">Example data</span><LtvChart /></div>
+      </div>
+      <div class="feature reveal">
+        <div class="stack-m">
+          <span class="chip" data-stage="block"><span class="marker" data-stage="block"></span>block.</span>
+          <h3 class="h2">Every finding leaves as a block</h3>
+          <p class="lead">No 80-page deck. A ranked register of changes, each with an owner, a KPI and a value in pounds, ranked higher when more evidence supports it.</p>
+        </div>
+        <div class="card viz"><span class="example-tag">Example data</span><BlockRegister /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section class="section section-tint" aria-labelledby="services-heading">
+    <div class="wrap">
+      <div class="section-head split">
+        <div class="stack-m">
+          <span class="eyebrow">Services</span>
+          <h2 id="services-heading">Six services. One connected system.</h2>
+        </div>
+        <p class="lead">Each service is built node, bond, block, and each makes the others stronger. Most engagements start with a business assessment.</p>
+      </div>
+      <div class="grid-3 svc-grid">
         {services.map((s) => (
-          <a class="el" href={`/services/${s.slug}`}>
-            <span class="no">{s.no}</span>
-            <span class="sym">{s.symbol}</span>
-            <span class="stack" style="gap:6px">
-              <span class="nm">{s.short}</span>
-              <span class="sm">{s.summary}</span>
-            </span>
+          <a class="card card-hover svc-card" href={`/services/${s.slug}`}>
+            <div class="svc-top"><span class="svc-sym">{s.symbol}</span><span class="label">{s.no}</span></div>
+            <h3>{s.name}</h3>
+            <p class="muted">{s.summary}</p>
+            <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
           </a>
         ))}
       </div>
-      <div class="map-wrap">
-        <div class="stack">
-          <h3>See how the services bond</h3>
-          <p class="map-help">Choose a service to see what it connects to, and why that makes both stronger.</p>
+      <div class="card map-card">
+        <div class="stack" style="margin-bottom:var(--s8)">
+          <h3>How the services bond</h3>
+          <p class="muted">Choose a service to see what it connects to, and why that makes both stronger.</p>
         </div>
         <ServiceMap />
       </div>
     </div>
   </section>
 
-  <!-- 5. How we work -->
-  <section class="section" id="how" aria-labelledby="how-heading">
-    <div class="wrap stack-l">
-      <div class="stack">
-        <span class="label">How an engagement runs</span>
+  <!-- Engagement -->
+  <section class="section" aria-labelledby="how-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">How an engagement runs</span>
         <h2 id="how-heading">From first look to lasting change.</h2>
       </div>
-      <ol class="flow">
-        <li data-stage="node"><span class="shape" aria-hidden="true"></span><span class="label">Weeks 1–2</span><span class="t">Diagnose</span><span class="d">Meet the people, read the data, find the leaks.</span></li>
-        <li data-stage="bond"><span class="shape" aria-hidden="true"></span><span class="label">Weeks 3–4</span><span class="t">Connect</span><span class="d">Bring teams together around one plan with owners.</span></li>
-        <li data-stage="block"><span class="shape" aria-hidden="true"></span><span class="label">Months 2–6</span><span class="t">Build</span><span class="d">Hands-on change, delivered across the business.</span></li>
-        <li data-stage="compound"><span class="shape" aria-hidden="true"></span><span class="label">Ongoing</span><span class="t">Compound</span><span class="d">Measure, learn, and let each block strengthen the next.</span></li>
+      <ol class="timeline">
+        <li data-stage="node"><span class="tl-dot"></span><span class="label">Weeks 1–2</span><h3>Diagnose</h3><p class="muted">Meet the people, read the data, find and size the leaks.</p></li>
+        <li data-stage="bond"><span class="tl-dot"></span><span class="label">Weeks 3–4</span><h3>Connect</h3><p class="muted">Bring the teams together around one plan, with owners.</p></li>
+        <li data-stage="block"><span class="tl-dot"></span><span class="label">Months 2–6</span><h3>Build</h3><p class="muted">Hands-on change, delivered across the business.</p></li>
+        <li data-stage="compound"><span class="tl-dot"></span><span class="label">Ongoing</span><h3>Compound</h3><p class="muted">Measure, learn and re-run the diagnostic each quarter.</p></li>
       </ol>
     </div>
   </section>
 
-  <!-- 6. Proof -->
-  <section class="section" aria-labelledby="proof-heading">
+  <!-- Results + founder -->
+  <section class="section section-tint" aria-labelledby="proof-heading">
     <div class="wrap stack-l">
-      <div class="stack">
-        <span class="label">Results</span>
+      <div class="section-head" style="margin-bottom:0">
+        <span class="eyebrow">Results</span>
         <h2 id="proof-heading">Small shifts that added up.</h2>
       </div>
       <div class="grid-3">
-        <div class="placeholder"><strong>Placeholder: result 1.</strong> A headline number and what moved it, e.g. a conversion or margin change with the timeframe.</div>
+        <div class="placeholder"><strong>Placeholder: result 1.</strong> A headline number and what moved it, with the timeframe.</div>
         <div class="placeholder"><strong>Placeholder: result 2.</strong> A retention or lifetime value result.</div>
         <div class="placeholder"><strong>Placeholder: result 3.</strong> A revenue or cost result, sized in £.</div>
       </div>
-      <div class="placeholder"><strong>Placeholder: short case study.</strong> Client (named or anonymised), the nodes we started with, the bonds we built, and the blocks that delivered the result.</div>
-    </div>
-  </section>
-
-  <!-- 7. Who's behind it -->
-  <section class="section" aria-labelledby="who-heading">
-    <div class="wrap grid-2 who">
-      <div class="placeholder photo"><strong>Placeholder: founder photo.</strong> Square, natural light, at work.</div>
-      <div class="stack-l">
-        <span class="label">Who’s behind compound.</span>
-        <h2 id="who-heading">Senior experience, hands-on delivery.</h2>
-        <div class="placeholder"><strong>Placeholder: founder introduction.</strong> Three or four lines on your experience across commercial, ecommerce, marketing and customer roles, and why you started compound.</div>
-        <a class="btn btn-ghost" href="/about">More about compound.</a>
+      <div class="card founder">
+        <div class="placeholder f-photo"><strong>Placeholder: founder photo</strong></div>
+        <div class="stack-m">
+          <span class="eyebrow">Who’s behind compound.</span>
+          <h3 class="h2">Senior experience, hands-on delivery.</h3>
+          <div class="placeholder"><strong>Placeholder: founder introduction.</strong> Three or four lines on your experience across commercial, ecommerce, marketing and customer roles, and why you started compound.</div>
+          <a class="link-arrow" href="/about">More about compound. <span class="arr" aria-hidden="true">→</span></a>
+        </div>
       </div>
     </div>
   </section>
@@ -150,35 +197,60 @@ import { services } from '../data/services';
 </Base>
 
 <style>
-  .hero { padding-block: clamp(56px, 10vw, 128px) clamp(48px, 8vw, 96px); }
-  .hero-inner { display: grid; gap: var(--s12); grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: center; }
-  .hero-act { display: flex; flex-wrap: wrap; gap: var(--s4); }
-  .hero-art { display: flex; justify-content: center; background: #fff; padding: var(--s8) var(--s4); border: var(--line-2) solid var(--outline); }
-  @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } .hero-art .mol { --mol-node: 32px; --mol-bond: 48px; } }
+  .hero { position: relative; padding-block: clamp(48px, 7vw, 96px) clamp(56px, 7vw, 96px); background: radial-gradient(1200px 520px at 85% 10%, var(--bond-soft), transparent 60%), radial-gradient(700px 400px at 65% 95%, var(--block-soft), transparent 60%), #fff; overflow: hidden; }
+  .hero-inner { display: grid; gap: clamp(40px, 5vw, 72px); grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; }
+  @media (max-width: 960px) { .hero-inner { grid-template-columns: 1fr; } }
+  .hero-act { display: flex; flex-wrap: wrap; gap: var(--s3); }
+  .hero-note { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--ink-muted); }
 
-  /* the reaction: node appears, bonds, then the block is built */
-  .react .n, .react .b, .react .k { animation: appear .5s ease both; }
-  .react > .r1 { animation-delay: .1s; }
-  .react > .b.r2, .react > .n.r2 { animation-delay: .6s; }
-  .react > .b.r3, .react > .k.r3 { animation-delay: 1.1s; }
-  .react > .n.r1 { animation-name: appear, toBond; animation-duration: .5s, .4s; animation-delay: .1s, .9s; }
-  .react > .n.r2 { animation-name: appear, toBond; animation-duration: .5s, .4s; animation-delay: .6s, .9s; }
-  .react > .n.r1, .react > .n.r2 { background: var(--bond); }
-  .react > .k { background: var(--block); }
-  .react > .k > .n { background: var(--block); }
-  @keyframes appear { from { opacity: 0; transform: scale(.6); } to { opacity: 1; transform: none; } }
-  @keyframes toBond { from { background: var(--node); } to { background: var(--bond); } }
-  @media (prefers-reduced-motion: reduce) { .react .n, .react .b, .react .k { animation: none; } }
+  .facts { border-block: 1px solid var(--line); background: #fff; }
+  .facts-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .facts-grid > div { padding: 8px 28px; border-left: 1px solid var(--line); display: grid; gap: 6px; }
+  .facts-grid > div:first-child { border-left: 0; padding-left: 0; }
+  .f-num { font: 400 52px/1 var(--font-display); letter-spacing: -0.03em; font-variation-settings: "SOFT" 30, "opsz" 144; }
+  .f-num small { font: 500 13px/1 var(--font-mono); letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); margin-left: 8px; }
+  .facts-grid p { color: var(--ink-muted); font-size: 15px; max-width: 26ch; }
+  @media (max-width: 860px) { .facts-grid { grid-template-columns: 1fr 1fr; row-gap: 28px; } .facts-grid > div:nth-child(3) { border-left: 0; padding-left: 0; } }
+  @media (max-width: 440px) { .facts-grid { grid-template-columns: 1fr; } .facts-grid > div { border-left: 0; padding-left: 0; } }
 
-  .quote { margin: 0; }
-  .symptoms { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
-  .symptoms li { padding-left: 28px; position: relative; }
-  .symptoms li::before { content: ""; position: absolute; left: 0; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: var(--node); border: 1.5px solid var(--outline); }
-  .method .panel { display: grid; gap: var(--s4); align-content: start; }
-  .method .panel .mol { min-height: 84px; }
-  .method .panel .mol { --mol-fill: #fff; }
-  .method .panel h3 { font-size: 34px; font-weight: 400; }
-  .map-wrap { display: grid; gap: var(--s6); border: var(--line-2) solid var(--outline); padding: clamp(20px, 4vw, 48px); margin-top: var(--s8); }
-  .map-help { color: var(--ink-muted); }
-  .who .photo { aspect-ratio: 1; display: grid; place-items: center; text-align: center; }
+  .problem { align-items: start; }
+  .symptoms { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; border-top: 1px solid var(--line); }
+  .symptoms li { display: grid; grid-template-columns: 22px 1fr; gap: 14px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+  .symptoms .marker { margin-top: 5px; }
+
+  .method-card { display: grid; gap: 14px; align-content: start; }
+  .mc-art { height: 132px; border-radius: 10px; display: grid; place-items: center; margin-bottom: 8px; }
+  .mc-art[data-stage="node"] { background: var(--node-soft); }
+  .mc-art[data-stage="bond"] { background: var(--bond-soft); }
+  .mc-art[data-stage="block"] { background: var(--block-soft); }
+  .method-card h3 { font-size: 34px; }
+
+  .feature { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: clamp(32px, 6vw, 88px); align-items: center; padding-block: clamp(32px, 4vw, 56px); }
+  .feature + .feature { border-top: 1px solid var(--line); }
+  .feature.flip > :first-child { order: 2; }
+  .feature .stack-m { justify-items: start; }
+  .viz { position: relative; padding-top: 48px; }
+  @media (max-width: 860px) { .feature { grid-template-columns: 1fr; } .feature.flip > :first-child { order: 0; } }
+
+  .svc-card { display: grid; gap: 12px; align-content: start; color: var(--ink); text-decoration: none; min-height: 250px; }
+  .svc-top { display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px; }
+  .svc-sym { width: 56px; height: 56px; display: grid; place-items: center; border-radius: 12px; background: var(--block-soft); border: 1px solid #cdebdc; font: 400 26px/1 var(--font-display); }
+  .svc-card .link-arrow { margin-top: auto; padding-top: 8px; }
+  .svc-card:hover .svc-sym { background: var(--block); }
+  .map-card { margin-top: var(--s8); padding: clamp(24px, 4vw, 48px); }
+
+  .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s6); }
+  .timeline li { position: relative; display: grid; gap: 10px; align-content: start; padding-top: 36px; }
+  .timeline li::before { content: ""; position: absolute; left: 0; right: calc(-1 * var(--s6)); top: 9px; height: 1.5px; background: var(--line); }
+  .timeline li:last-child::before { right: 0; }
+  .tl-dot { position: absolute; left: 0; top: 0; width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--ink); background: var(--node); }
+  .timeline li[data-stage="bond"] .tl-dot { background: var(--bond); }
+  .timeline li[data-stage="block"] .tl-dot { background: var(--block); border-radius: 4px; }
+  .timeline li[data-stage="compound"] .tl-dot { background: var(--ink); border-radius: 4px; }
+  @media (max-width: 860px) { .timeline { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .timeline { grid-template-columns: 1fr; } .timeline li::before { display: none; } }
+
+  .founder { display: grid; grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+  .f-photo { aspect-ratio: 4 / 5; display: grid; place-items: center; text-align: center; }
+  @media (max-width: 760px) { .founder { grid-template-columns: 1fr; } .f-photo { aspect-ratio: 4 / 3; } }
 </style>

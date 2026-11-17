@@ -2,22 +2,33 @@
 interface Props { heading?: string; button?: string; }
 const { heading = 'Start with a conversation.', button = 'Book a free growth check' } = Astro.props;
 ---
-<section class="section cta" aria-labelledby="cta-heading">
+<section class="cta ink" aria-labelledby="cta-heading">
   <div class="wrap cta-inner">
-    <div class="stack">
-      <span class="label">Next step</span>
-      <h2 id="cta-heading">{heading}</h2>
+    <div class="stack-m">
+      <span class="eyebrow">Next step</span>
+      <h2 id="cta-heading" class="display-l">{heading}</h2>
       <p class="lead">A free 30-minute call. Tell us what’s on your mind, and we’ll tell you honestly where we’d look first and whether we can help.</p>
+      <div class="cta-act">
+        <a class="btn btn-light" href="/book">{button} <span class="arr" aria-hidden="true">→</span></a>
+        <a class="btn btn-ghost-light" href="/approach">How we work</a>
+      </div>
     </div>
-    <div class="cta-act">
-      <a class="btn btn-primary" href="/book">{button}</a>
-      <span class="mol mol-l" aria-hidden="true"><span class="n" data-stage="node"></span><span class="b"></span><span class="n" data-stage="bond"></span><span class="b"></span><span class="k" data-stage="block"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>
-    </div>
+    <ul class="cta-points" aria-label="What you get">
+      <li><span class="marker"></span><span><b>30 minutes</b> with someone senior, not a sales team</span></li>
+      <li><span class="marker" data-stage="bond"></span><span><b>Honest view</b> of where growth is leaking</span></li>
+      <li><span class="marker" data-stage="block"></span><span><b>A short follow-up</b> with where we’d start</span></li>
+    </ul>
   </div>
 </section>
 
 <style>
-  .cta-inner { display: grid; gap: var(--s8); grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; }
-  .cta-act { display: grid; gap: var(--s8); justify-items: start; }
-  @media (max-width: 760px) { .cta-inner { grid-template-columns: 1fr; } .cta-act .mol { display: none; } }
+  .cta { padding-block: clamp(80px, 10vw, 128px); position: relative; overflow: hidden; }
+  .cta::after { content: ""; position: absolute; right: -160px; top: -160px; width: 560px; height: 560px; border-radius: 50%; background: radial-gradient(closest-side, rgba(169,200,255,.16), transparent); pointer-events: none; }
+  .cta-inner { position: relative; z-index: 1; display: grid; gap: var(--s12); grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); align-items: end; }
+  .cta-act { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s2); }
+  .cta-points { list-style: none; margin: 0; padding: var(--s6); display: grid; gap: var(--s5); border: 1px solid var(--ink-line); border-radius: var(--r-2); background: rgba(255,255,255,.03); }
+  .cta-points li { display: grid; grid-template-columns: 16px 1fr; gap: 14px; align-items: start; color: var(--on-ink-muted); }
+  .cta-points b { color: var(--on-ink); font-weight: 600; }
+  .cta-points .marker { margin-top: 6px; border-color: var(--on-ink); }
+  @media (max-width: 860px) { .cta-inner { grid-template-columns: 1fr; } }
 </style>

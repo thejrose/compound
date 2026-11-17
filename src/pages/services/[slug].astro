@@ -1,6 +1,12 @@
 ---
 import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
 import CtaBand from '../../components/CtaBand.astro';
+import TrustPanel from '../../components/viz/TrustPanel.astro';
+import LtvChart from '../../components/viz/LtvChart.astro';
+import BlockRegister from '../../components/viz/BlockRegister.astro';
+import Funnel from '../../components/viz/Funnel.astro';
+import Margin from '../../components/viz/Margin.astro';
 import { services, bondsFor, type Service } from '../../data/services';
 
 export function getStaticPaths() {
@@ -8,107 +14,130 @@ export function getStaticPaths() {
 }
 const { service: s } = Astro.props as { service: Service };
 const cross = bondsFor(s.slug);
+const viz: Record<string, string> = {
+  'business-assessment': 'trust', 'growth-strategy': 'register', conversion: 'funnel',
+  'customer-retention': 'ltv', 'operations-and-analytics': 'margin', 'fractional-leadership': 'register',
+};
+const v = viz[s.slug];
+const stages = [
+  { key: 'node', name: 'node', step: '01 · Where we start', d: s.node },
+  { key: 'bond', name: 'bond', step: '02 · How we connect it', d: s.bond },
+  { key: 'block', name: 'block', step: '03 · What gets built', d: s.block },
+] as const;
 ---
 <Base title={s.name} description={`${s.promise} ${s.forWho}`}>
-  <section class="section">
-    <div class="wrap svc-hero">
-      <div class="el big" aria-hidden="true"><span class="no">{s.no}</span><span class="sym">{s.symbol}</span><span class="nm">{s.short}</span></div>
-      <div class="stack-l">
-        <a class="label crumb" href="/services">Services</a>
-        <h1>{s.name}</h1>
-        <p class="display promise">{s.promise}</p>
-        <p class="lead">{s.forWho}</p>
-        <div><a class="btn btn-primary" href="/book">{s.cta}</a></div>
-      </div>
+  <PageHero eyebrow={`Services · ${s.no}`} title={`${s.name}<span class="dot">.</span>`} lead={s.promise}>
+    <div slot="actions" class="ph-actions">
+      <a class="btn btn-primary" href="/book">{s.cta} <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn btn-secondary" href="/services">All services</a>
     </div>
-  </section>
+    <aside class="card id-card">
+      <div class="id-top"><span class="id-sym">{s.symbol}</span><span class="label">{s.no} / 06</span></div>
+      <div class="stack" style="gap:10px">
+        <span class="label">Who it’s for</span>
+        <p>{s.forWho}</p>
+      </div>
+      <div class="stack" style="gap:10px">
+        <span class="label">Numbers we move</span>
+        <div class="kpis">{s.block.kpis.map((k) => <span class="chip" data-stage="block">{k}</span>)}</div>
+      </div>
+      <p class="id-bonds"><span class="mol" aria-hidden="true"><span class="n" data-stage="bond"></span><span class="b"></span><span class="n" data-stage="bond"></span></span>Bonds to {cross.length} other services</p>
+    </aside>
+  </PageHero>
 
-  <section class="section" aria-label="How this service is built">
+  <section class="section section-tint" aria-labelledby="build-heading">
     <div class="wrap">
-      <div class="stage" data-stage="node">
-        <div class="stage-head">
-          <span class="mol mol-l" aria-hidden="true"><span class="n"></span></span>
-          <span class="stage-name">node<span class="dot">.</span></span>
-          <span class="label">Where we start</span>
-        </div>
-        <div class="stage-body">
-          <p class="h3">{s.node.lead}</p>
-          <ul>{s.node.items.map((i) => <li>{i}</li>)}</ul>
-        </div>
+      <div class="section-head">
+        <span class="eyebrow">How it’s built</span>
+        <h2 id="build-heading">node<span class="dot">.</span> bond<span class="dot">.</span> block<span class="dot">.</span></h2>
       </div>
-      <div class="stage" data-stage="bond">
-        <div class="stage-head">
-          <span class="mol mol-l" aria-hidden="true"><span class="n"></span><span class="b"></span><span class="n"></span></span>
-          <span class="stage-name">bond<span class="dot">.</span></span>
-          <span class="label">How we connect it</span>
-        </div>
-        <div class="stage-body">
-          <p class="h3">{s.bond.lead}</p>
-          <ul>{s.bond.items.map((i) => <li>{i}</li>)}</ul>
-        </div>
-      </div>
-      <div class="stage" data-stage="block">
-        <div class="stage-head">
-          <span class="mol mol-l" aria-hidden="true"><span class="k"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>
-          <span class="stage-name">block<span class="dot">.</span></span>
-          <span class="label">What gets built</span>
-        </div>
-        <div class="stage-body">
-          <p class="h3">{s.block.lead}</p>
-          <ul>{s.block.items.map((i) => <li>{i}</li>)}</ul>
-          <div class="kpis"><span class="label">Numbers we move</span><div class="kpi-row">{s.block.kpis.map((k) => <span class="tag" data-stage="block">{k}</span>)}</div></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section" aria-labelledby="cross-heading">
-    <div class="wrap grid-2">
-      <div class="stack">
-        <span class="label">Cross-bonds</span>
-        <h2 id="cross-heading">What makes this block stronger<span class="dot">.</span></h2>
-        <p class="lead">No service works alone. {s.short} bonds to {cross.length} other services, and every bond makes both blocks stronger.</p>
-        <p class="tools"><span class="label">Behind it</span><br />{s.tools}</p>
-      </div>
-      <ul class="cross">
-        {cross.map((c) => (
-          <li>
-            <a class="cross-link" href={`/services/${c.other.slug}`}>
-              <span class="cross-sym" aria-hidden="true">{c.other.symbol}</span>
-              <span class="stack" style="gap:4px"><span class="cross-name">{c.other.name}</span><span class="cross-why">{c.why}</span></span>
-            </a>
-          </li>
+      <div class="grid-3 stages">
+        {stages.map((st) => (
+          <article class="card stage-card reveal" data-stage={st.key}>
+            <div class="sc-head">
+              <span class="sc-art">
+                {st.key === 'node' && <span class="mol mol-l" aria-hidden="true"><span class="n"></span></span>}
+                {st.key === 'bond' && <span class="mol mol-l" aria-hidden="true"><span class="n"></span><span class="b"></span><span class="n"></span></span>}
+                {st.key === 'block' && <span class="mol mol-l" aria-hidden="true"><span class="k"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>}
+              </span>
+              <span class="label">{st.step}</span>
+            </div>
+            <h3>{st.name}<span class="dot">.</span></h3>
+            <p class="sc-lead">{st.d.lead}</p>
+            <ul>{st.d.items.map((i) => <li>{i}</li>)}</ul>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   </section>
 
-  <section class="section" aria-label="Results">
+  <section class="section" aria-labelledby="see-heading">
+    <div class="wrap grid-2">
+      <div class="stack-m reveal">
+        <span class="eyebrow">What you’ll see</span>
+        <h2 id="see-heading">Evidence you can act on.</h2>
+        <p class="lead">Every finding comes with the data behind it, a trust score, and the people who own the number. This is the kind of view you get.</p>
+        <p class="small muted">Behind it: {s.tools}.</p>
+      </div>
+      <div class="card viz reveal">
+        <span class="example-tag">Example data</span>
+        {v === 'trust' && <TrustPanel />}
+        {v === 'ltv' && <LtvChart />}
+        {v === 'register' && <BlockRegister rows={4} />}
+        {v === 'funnel' && <Funnel />}
+        {v === 'margin' && <Margin />}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-tint" aria-labelledby="cross-heading">
     <div class="wrap">
-      <div class="placeholder"><strong>Placeholder: a {s.short.toLowerCase()} result.</strong> One headline number or a short client story for this service, built node → bond → block.</div>
+      <div class="section-head split">
+        <div class="stack-m">
+          <span class="eyebrow">Cross-bonds</span>
+          <h2 id="cross-heading">What makes this block stronger.</h2>
+        </div>
+        <p class="lead">No service works alone. {s.short} bonds to {cross.length} other services, and every bond makes both blocks stronger.</p>
+      </div>
+      <div class="grid-3">
+        {cross.map((c) => (
+          <a class="card card-hover cross-card" href={`/services/${c.other.slug}`}>
+            <div class="cc-top"><span class="cc-sym">{c.other.symbol}</span><span class="mol" aria-hidden="true"><span class="n" data-stage="bond"></span><span class="b"></span><span class="n" data-stage="bond"></span></span></div>
+            <h3>{c.other.name}</h3>
+            <p class="muted">{c.why}</p>
+            <span class="link-arrow">Explore <span class="arr" aria-hidden="true">→</span></span>
+          </a>
+        ))}
+      </div>
     </div>
   </section>
 
-  <CtaBand heading={`${s.cta}.`} button="Book a free growth check" />
+  <section class="section-tight">
+    <div class="wrap">
+      <div class="placeholder"><strong>Placeholder: a {s.short.toLowerCase()} result.</strong> One headline number or a short client story for this service, told node → bond → block.</div>
+    </div>
+  </section>
+
+  <CtaBand heading={`${s.cta}.`} />
 </Base>
 
 <style>
-  .svc-hero { display: grid; grid-template-columns: 240px 1fr; gap: var(--s12); align-items: start; }
-  .el.big { min-height: 240px; background: var(--block); }
-  .el.big .sym { font-size: 96px; }
-  .el.big:hover { transform: none; }
-  .crumb { text-decoration: none; }
-  .crumb:hover { text-decoration: underline; }
-  .promise { font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
-  .stage .mol { --mol-ink: var(--outline); }
-  .kpis { margin-top: var(--s4); display: grid; gap: var(--s2); }
-  .kpi-row { display: flex; flex-wrap: wrap; gap: var(--s2); }
-  .tools { color: var(--ink-muted); margin-top: var(--s4); }
-  .cross { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
-  .cross-link { display: grid; grid-template-columns: 64px 1fr; gap: var(--s4); align-items: center; padding: var(--s4); border: var(--line-2) solid var(--outline); color: var(--ink); text-decoration: none; background: #fff; transition: background-color .2s ease; }
-  .cross-link:hover { background: var(--bond); }
-  .cross-sym { width: 64px; height: 64px; display: grid; place-items: center; border: var(--line-2) solid var(--outline); background: var(--block); font: 400 28px/1 var(--font-display); }
-  .cross-name { font-weight: 600; }
-  .cross-why { color: var(--ink-muted); font-size: 15.5px; }
-  @media (max-width: 760px) { .svc-hero { grid-template-columns: 1fr; } .el.big { min-height: 160px; max-width: 200px; } .el.big .sym { font-size: 64px; } }
+  .ph-actions { display: flex; flex-wrap: wrap; gap: var(--s3); }
+  .id-card { display: grid; gap: 22px; box-shadow: var(--shadow-3); }
+  .id-top { display: flex; justify-content: space-between; align-items: start; }
+  .id-sym { width: 88px; height: 88px; display: grid; place-items: center; border-radius: 18px; background: var(--block-soft); border: 1px solid #cdebdc; font: 400 44px/1 var(--font-display); }
+  .kpis { display: flex; flex-wrap: wrap; gap: 8px; }
+  .id-bonds { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--ink-muted); padding-top: 18px; border-top: 1px solid var(--line); }
+  .stage-card { display: grid; gap: 14px; align-content: start; border-top: 4px solid var(--mol-fill); }
+  .sc-head { display: flex; justify-content: space-between; align-items: center; min-height: 64px; }
+  .stage-card h3 { font-size: 34px; }
+  .sc-lead { font-weight: 600; }
+  .stage-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; color: var(--ink-muted); font-size: 15.5px; }
+  .stage-card li { display: grid; grid-template-columns: 16px 1fr; gap: 8px; }
+  .stage-card li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--ink-faint); margin-top: 10px; }
+  .viz { position: relative; padding-top: 48px; }
+  .cross-card { display: grid; gap: 12px; align-content: start; color: var(--ink); text-decoration: none; }
+  .cc-top { display: flex; justify-content: space-between; align-items: center; }
+  .cc-sym { width: 48px; height: 48px; display: grid; place-items: center; border-radius: 12px; background: var(--block-soft); border: 1px solid #cdebdc; font: 400 22px/1 var(--font-display); }
+  .cross-card .link-arrow { margin-top: 6px; }
 </style>

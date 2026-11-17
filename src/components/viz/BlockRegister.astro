@@ -1,0 +1,45 @@
+---
+// The block register: every opportunity leaves as a block with an owner, a KPI and its bonds. Example data.
+interface Props { rows?: number }
+const { rows = 4 } = Astro.props;
+const data = [
+  { block: 'Fix delivery messaging at checkout', svc: 'Cr', owner: 'Ecommerce', kpi: 'CVR 2.1% → 2.5%', bonds: 3, status: 'Live' },
+  { block: 'Second-purchase journey', svc: 'Cu', owner: 'CRM', kpi: 'Repeat 24% → 30%', bonds: 3, status: 'In build' },
+  { block: 'Cut two margin-trap SKUs', svc: 'Op', owner: 'Trading', kpi: 'CM2 +1.8 pts', bonds: 2, status: 'Agreed' },
+  { block: 'Rebalance paid social to target CAC', svc: 'Gs', owner: 'Marketing', kpi: 'CAC £38 → £31', bonds: 2, status: 'Agreed' },
+  { block: 'Weekly trading pack', svc: 'Op', owner: 'MD', kpi: 'Every block tracked', bonds: 4, status: 'Live' },
+].slice(0, rows);
+---
+<div class="reg">
+  <div class="reg-head"><span class="label">Block register</span><span class="label">{data.length} blocks</span></div>
+  <div class="reg-table" role="table" aria-label="Example block register">
+    <div class="reg-row reg-th" role="row"><span role="columnheader">Block</span><span role="columnheader">KPI</span><span role="columnheader">Bonds</span><span role="columnheader">Status</span></div>
+    {data.map((r) => (
+      <div class="reg-row" role="row">
+        <span role="cell" class="reg-b"><b class="reg-svc">{r.svc}</b><span><span class="reg-name">{r.block}</span><span class="reg-owner">Owner: {r.owner}</span></span></span>
+        <span role="cell" class="reg-kpi">{r.kpi}</span>
+        <span role="cell" class="reg-bonds" aria-label={`${r.bonds} bonds`}>{Array.from({ length: 4 }, (_, i) => <i class={i < r.bonds ? 'on' : ''}></i>)}</span>
+        <span role="cell"><span class={`reg-st st-${r.status.replace(' ', '').toLowerCase()}`}>{r.status}</span></span>
+      </div>
+    ))}
+  </div>
+</div>
+<style>
+  .reg { display: grid; gap: 14px; font-size: 13.5px; }
+  .reg-head { display: flex; justify-content: space-between; }
+  .reg-row { display: grid; grid-template-columns: minmax(0, 1.9fr) minmax(0, 1fr) 52px 74px; gap: 12px; align-items: center; padding: 11px 0; border-top: 1px solid var(--line-soft); }
+  .reg-th { border-top: 0; padding: 0 0 4px; font: 500 10.5px/1 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; color: var(--ink-faint); }
+  .reg-b { display: grid; grid-template-columns: 30px 1fr; gap: 10px; align-items: center; }
+  .reg-svc { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 7px; background: var(--block-soft); border: 1px solid #cdebdc; font: 400 14px/1 var(--font-display); }
+  .reg-name { display: block; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .reg-owner { display: block; font-size: 12px; color: var(--ink-faint); }
+  .reg-kpi { font: 500 12px/1.3 var(--font-mono); color: var(--ink-2); }
+  .reg-bonds { display: flex; gap: 4px; }
+  .reg-bonds i { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .reg-bonds i.on { background: var(--bond-deep); }
+  .reg-st { display: inline-block; font: 500 10.5px/1 var(--font-mono); letter-spacing: .04em; padding: 5px 8px; border-radius: 99px; white-space: nowrap; }
+  .st-live { background: var(--block-soft); color: var(--block-deep); }
+  .st-inbuild { background: var(--bond-soft); color: var(--bond-deep); }
+  .st-agreed { background: var(--node-soft); color: var(--node-deep); }
+  @media (max-width: 520px) { .reg-row { grid-template-columns: minmax(0, 1fr) 70px; } .reg-row > :nth-child(2), .reg-row > :nth-child(3) { display: none; } }
+</style>

@@ -31,7 +31,7 @@ const ordered = order.map((s) => services.find((x) => x.slug === s)!);
       </g>
       {ordered.map((s) => (
         <g class="smap-block" data-slug={s.slug} transform={`translate(${pos[s.slug].x - H} ${pos[s.slug].y - H})`}>
-          <rect width={H * 2} height={H * 2} />
+          <rect width={H * 2} height={H * 2} rx="14" />
           <circle cx="0" cy="0" r="9" /><circle cx={H * 2} cy="0" r="9" /><circle cx="0" cy={H * 2} r="9" /><circle cx={H * 2} cy={H * 2} r="9" />
           <text x={H} y={H + 4} text-anchor="middle" class="sym">{s.symbol}</text>
           <text x={H} y={H + 26} text-anchor="middle" class="cnt">{bondCount(s.slug)} bonds</text>
@@ -59,7 +59,7 @@ const ordered = order.map((s) => services.find((x) => x.slug === s)!);
             <li><a href={`/services/${b.other.slug}`}>{b.other.short}</a>: {b.why}</li>
           ))}
         </ul>
-        <a class="btn btn-ghost btn-sm" href={`/services/${s.slug}`}>Explore {s.short.toLowerCase()}</a>
+        <a class="link-arrow" href={`/services/${s.slug}`}>Explore {s.short.toLowerCase()} <span class="arr" aria-hidden="true">→</span></a>
       </div>
     ))}
   </div>
@@ -69,25 +69,31 @@ const ordered = order.map((s) => services.find((x) => x.slug === s)!);
   .smap { display: grid; gap: var(--s8); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; }
   @media (max-width: 860px) { .smap { grid-template-columns: 1fr; } }
   .smap-draw svg { width: 100%; height: auto; overflow: visible; }
-  .smap-bonds line { stroke: var(--line); stroke-width: 2; stroke-linecap: round; transition: stroke .25s ease; }
-  .smap-bonds line.on { stroke: var(--outline); }
+  .smap-bonds line { stroke: #DCE1EA; stroke-width: 1.5; stroke-linecap: round; transition: stroke .25s ease; }
+  .smap-bonds line.on { stroke: var(--ink); stroke-width: 1.75; }
   .smap-block { cursor: pointer; }
-  .smap-block rect, .smap-block circle { fill: #fff; stroke: var(--outline); stroke-width: 2; transition: fill .3s ease; }
-  .smap-block.linked rect, .smap-block.linked circle { fill: var(--bond); }
-  .smap-block.active rect, .smap-block.active circle { fill: var(--block); }
+  .smap-block rect { fill: #fff; stroke: #C9D0DC; stroke-width: 1.5; rx: 14px; filter: drop-shadow(0 6px 14px rgba(23,32,51,.08)); transition: fill .3s ease, stroke .3s ease; }
+  .smap-block circle { fill: #fff; stroke: #C9D0DC; stroke-width: 1.5; transition: fill .3s ease, stroke .3s ease; }
+  .smap-block.linked rect, .smap-block.linked circle, .smap-block.active rect, .smap-block.active circle { stroke: var(--ink); }
+  .smap-block.linked rect, .smap-block.linked circle { fill: var(--bond-soft); }
+  .smap-block.linked circle { fill: var(--bond); }
+  .smap-block.active rect { fill: var(--block-soft); }
+  .smap-block.active circle { fill: var(--block); }
   .smap-block .sym { font: 400 32px/1 var(--font-display); font-variation-settings: "SOFT" 50, "opsz" 96; fill: var(--ink); }
   .smap-block .cnt { font: 500 11px/1 var(--font-mono); letter-spacing: .06em; fill: var(--ink-muted); text-transform: uppercase; }
   .smap-tabs { display: flex; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s6); }
-  .smap-tabs button { display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--font-text); color: var(--ink); background: #fff; border: var(--line-2) solid var(--line-strong); border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+  .smap-tabs button { display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--font-text); color: var(--ink); background: #fff; border: 1px solid var(--line); box-shadow: var(--shadow-1); border-radius: 999px; padding: 10px 15px; cursor: pointer; transition: background-color .2s ease, border-color .2s ease; }
+  .smap-tabs button:hover { border-color: var(--line-strong); }
   .smap-tabs button .sym { font: 400 16px/1 var(--font-display); }
-  .smap-tabs button[aria-selected="true"] { background: var(--block); border-color: var(--outline); }
+  .smap-tabs button[aria-selected="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
   .smap-panel { display: grid; gap: var(--s3); }
   .smap-panel[hidden] { display: none; }
   .smap-promise { color: var(--ink-muted); font-size: 18px; }
   .smap-panel ul { margin: 0 0 var(--s3); padding: 0; list-style: none; display: grid; gap: var(--s3); }
   .smap-panel li { padding-left: 22px; position: relative; font-size: 15.5px; line-height: 1.5; }
-  .smap-panel li::before { content: ""; position: absolute; left: 0; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bond); border: 1.5px solid var(--outline); }
-  .smap-panel .btn { justify-self: start; }
+  .smap-panel li::before { content: ""; position: absolute; left: 0; top: 8px; width: 9px; height: 9px; border-radius: 50%; background: var(--bond); border: 1.5px solid var(--ink); }
+  .smap-panel .link-arrow { justify-self: start; }
+  .smap-panel h3 { font-size: 28px; }
   @media (prefers-reduced-motion: reduce) { .smap-bonds line, .smap-block rect, .smap-block circle { transition: none; } }
 </style>
 

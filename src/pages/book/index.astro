@@ -2,28 +2,32 @@
 import Base from '../../layouts/Base.astro';
 ---
 <Base title="Book a growth check" description="Book a free 30-minute growth check with compound. Tell us what's on your mind and we'll tell you where we'd look first.">
-  <section class="section">
+  <section class="book-wrap">
     <div class="wrap book">
       <div class="stack-l">
-        <span class="label">Book a growth check</span>
+        <span class="eyebrow">Book a growth check</span>
         <h1>Start with a conversation<span class="dot">.</span></h1>
-        <p class="lead">A free 30-minute call. No pitch deck.</p>
+        <p class="lead">A free 30-minute call with someone senior. No pitch deck.</p>
         <ol class="steps">
-          <li data-stage="node"><strong>You tell us</strong> what’s on your mind: growth, margin, customers, a new market, a gap in the team.</li>
-          <li data-stage="bond"><strong>We ask the questions</strong> an outsider would, and connect what we hear.</li>
-          <li data-stage="block"><strong>You get a short follow-up</strong> with where we’d look first, and whether we can help.</li>
+          <li><span class="marker"></span><div><h4>You tell us what’s on your mind</h4><p class="muted">Growth, margin, customers, a new market, or a gap in the team.</p></div></li>
+          <li><span class="marker" data-stage="bond"></span><div><h4>We ask the questions an outsider would</h4><p class="muted">And connect what we hear to where growth usually leaks.</p></div></li>
+          <li><span class="marker" data-stage="block"></span><div><h4>You get a short follow-up</h4><p class="muted">Where we’d look first, and whether we can help.</p></div></li>
         </ol>
-        <div class="placeholder"><strong>Placeholder: booking calendar.</strong> A Cal.com or Calendly embed goes here so people can pick a time directly.</div>
+        <div class="placeholder"><strong>Placeholder: booking calendar.</strong> A Cal.com or Calendly embed so people can pick a time directly.</div>
       </div>
 
-      <form class="panel form" name="growth-check" method="POST" action="/book/thanks" data-netlify="true" netlify-honeypot="company-url">
+      <form class="card form" name="growth-check" method="POST" action="/book/thanks" data-netlify="true" netlify-honeypot="company-url">
         <input type="hidden" name="form-name" value="growth-check" />
-        <p class="sr-only"><label>Leave this empty: <input name="company-url" /></label></p>
-        <h2 class="h3">Or send us a note</h2>
-        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required /></div>
-        <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
-        <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization" required /></div>
-        <div class="field"><label for="f-site">Website</label><input id="f-site" name="website" type="url" placeholder="https://" /></div>
+        <p class="sr-only"><label>Leave this empty: <input name="company-url" tabindex="-1" autocomplete="off" /></label></p>
+        <div class="stack" style="gap:6px"><h2 class="h3">Send us a note</h2><p class="muted small">We reply within one working day.</p></div>
+        <div class="two">
+          <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+          <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization" required /></div>
+          <div class="field"><label for="f-site">Website</label><input id="f-site" name="website" type="url" placeholder="https://" /></div>
+        </div>
         <div class="field">
           <label for="f-rev">Annual online revenue</label>
           <select id="f-rev" name="revenue">
@@ -32,20 +36,21 @@ import Base from '../../layouts/Base.astro';
           </select>
         </div>
         <div class="field"><label for="f-msg">What’s on your mind?</label><textarea id="f-msg" name="message" rows="5"></textarea></div>
-        <button class="btn btn-primary" type="submit">Send</button>
-        <p class="hint">We’ll reply within one working day. See our <a href="/privacy">privacy notice</a> for how we use your details.</p>
+        <button class="btn btn-primary" type="submit">Send <span class="arr" aria-hidden="true">→</span></button>
+        <p class="muted small">See our <a href="/privacy">privacy notice</a> for how we use your details.</p>
       </form>
     </div>
   </section>
 </Base>
 
 <style>
-  .book { display: grid; gap: var(--s12); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
-  @media (max-width: 860px) { .book { grid-template-columns: 1fr; } }
-  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
-  .steps li { padding-left: 34px; position: relative; }
-  .steps li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--outline); background: var(--mol-fill); }
-  .steps li[data-stage="block"]::before { border-radius: 0; }
-  .form { display: grid; gap: var(--s4); }
-  .hint { font-size: 14px; color: var(--ink-muted); }
+  .book-wrap { padding-block: clamp(56px, 8vw, 104px); background: radial-gradient(900px 420px at 90% 0%, var(--bond-soft), transparent 60%), #fff; }
+  .book { display: grid; gap: clamp(32px, 5vw, 72px); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  @media (max-width: 900px) { .book { grid-template-columns: 1fr; } }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; border-top: 1px solid var(--line); }
+  .steps li { display: grid; grid-template-columns: 24px 1fr; gap: 12px; padding: 16px 0; border-bottom: 1px solid var(--line); }
+  .steps .marker { margin-top: 5px; }
+  .form { display: grid; gap: 18px; box-shadow: var(--shadow-3); }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 520px) { .two { grid-template-columns: 1fr; } }
 </style>
