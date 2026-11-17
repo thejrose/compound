@@ -1,0 +1,58 @@
+---
+import Base from '../../layouts/Base.astro';
+import ServiceMap from '../../components/ServiceMap.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services';
+---
+<Base title="Services" description="Six compound. services, each built node, bond, block, and each one making the others stronger: business assessment, growth strategy, conversion, customer retention, operations and analytics, fractional leadership.">
+  <section class="section">
+    <div class="wrap stack-l">
+      <div class="stack">
+        <span class="label">Services</span>
+        <h1>Six services, built the same way<span class="dot">.</span></h1>
+        <p class="lead">Every service starts with the nodes (your people and data), makes the bonds (the connections between them) and builds the blocks (real changes with an owner, a date and a number). Most engagements start with a business assessment.</p>
+      </div>
+      <ServiceMap />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap stack-l">
+      {services.map((s) => (
+        <article class="svc">
+          <a class="el" href={`/services/${s.slug}`} aria-hidden="true" tabindex="-1">
+            <span class="no">{s.no}</span><span class="sym">{s.symbol}</span><span class="nm">{s.short}</span>
+          </a>
+          <div class="stack">
+            <h2 class="h3"><a href={`/services/${s.slug}`}>{s.name}</a></h2>
+            <p class="svc-promise">{s.promise}</p>
+            <p class="svc-for">{s.forWho}</p>
+            <dl class="svc-stages">
+              <div data-stage="node"><dt>node.</dt><dd>{s.node.lead}</dd></div>
+              <div data-stage="bond"><dt>bond.</dt><dd>{s.bond.lead}</dd></div>
+              <div data-stage="block"><dt>block.</dt><dd>{s.block.lead}</dd></div>
+            </dl>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure where to start? Start with the leaks." button="Book a free growth check" />
+</Base>
+
+<style>
+  .svc { display: grid; grid-template-columns: 170px 1fr; gap: var(--s8); padding-bottom: var(--s8); border-bottom: 1px solid var(--line); }
+  .svc:last-child { border-bottom: 0; }
+  .svc h2 a { color: var(--ink); text-decoration: none; }
+  .svc h2 a:hover { text-decoration: underline; }
+  .svc h2 { font-size: 30px; }
+  .svc-promise { font-size: 19px; }
+  .svc-for { color: var(--ink-muted); }
+  .svc-stages { margin: var(--s2) 0 0; display: grid; gap: var(--s2); }
+  .svc-stages div { display: grid; grid-template-columns: 70px 1fr; gap: var(--s3); align-items: baseline; }
+  .svc-stages dt { font: 500 12px/1 var(--font-mono); letter-spacing: .06em; padding: 5px 8px; border: 1.5px solid var(--outline); border-radius: 999px; text-align: center; background: var(--mol-fill); }
+  .svc-stages div[data-stage="block"] dt { border-radius: 0; }
+  .svc-stages dd { margin: 0; }
+  @media (max-width: 640px) { .svc { grid-template-columns: 1fr; } .svc .el { display: none; } }
+</style>

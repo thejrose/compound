@@ -1,0 +1,114 @@
+---
+import Base from '../../layouts/Base.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services, bondsFor, type Service } from '../../data/services';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+const { service: s } = Astro.props as { service: Service };
+const cross = bondsFor(s.slug);
+---
+<Base title={s.name} description={`${s.promise} ${s.forWho}`}>
+  <section class="section">
+    <div class="wrap svc-hero">
+      <div class="el big" aria-hidden="true"><span class="no">{s.no}</span><span class="sym">{s.symbol}</span><span class="nm">{s.short}</span></div>
+      <div class="stack-l">
+        <a class="label crumb" href="/services">Services</a>
+        <h1>{s.name}</h1>
+        <p class="display promise">{s.promise}</p>
+        <p class="lead">{s.forWho}</p>
+        <div><a class="btn btn-primary" href="/book">{s.cta}</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-label="How this service is built">
+    <div class="wrap">
+      <div class="stage" data-stage="node">
+        <div class="stage-head">
+          <span class="mol mol-l" aria-hidden="true"><span class="n"></span></span>
+          <span class="stage-name">node<span class="dot">.</span></span>
+          <span class="label">Where we start</span>
+        </div>
+        <div class="stage-body">
+          <p class="h3">{s.node.lead}</p>
+          <ul>{s.node.items.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      </div>
+      <div class="stage" data-stage="bond">
+        <div class="stage-head">
+          <span class="mol mol-l" aria-hidden="true"><span class="n"></span><span class="b"></span><span class="n"></span></span>
+          <span class="stage-name">bond<span class="dot">.</span></span>
+          <span class="label">How we connect it</span>
+        </div>
+        <div class="stage-body">
+          <p class="h3">{s.bond.lead}</p>
+          <ul>{s.bond.items.map((i) => <li>{i}</li>)}</ul>
+        </div>
+      </div>
+      <div class="stage" data-stage="block">
+        <div class="stage-head">
+          <span class="mol mol-l" aria-hidden="true"><span class="k"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>
+          <span class="stage-name">block<span class="dot">.</span></span>
+          <span class="label">What gets built</span>
+        </div>
+        <div class="stage-body">
+          <p class="h3">{s.block.lead}</p>
+          <ul>{s.block.items.map((i) => <li>{i}</li>)}</ul>
+          <div class="kpis"><span class="label">Numbers we move</span><div class="kpi-row">{s.block.kpis.map((k) => <span class="tag" data-stage="block">{k}</span>)}</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="cross-heading">
+    <div class="wrap grid-2">
+      <div class="stack">
+        <span class="label">Cross-bonds</span>
+        <h2 id="cross-heading">What makes this block stronger<span class="dot">.</span></h2>
+        <p class="lead">No service works alone. {s.short} bonds to {cross.length} other services, and every bond makes both blocks stronger.</p>
+        <p class="tools"><span class="label">Behind it</span><br />{s.tools}</p>
+      </div>
+      <ul class="cross">
+        {cross.map((c) => (
+          <li>
+            <a class="cross-link" href={`/services/${c.other.slug}`}>
+              <span class="cross-sym" aria-hidden="true">{c.other.symbol}</span>
+              <span class="stack" style="gap:4px"><span class="cross-name">{c.other.name}</span><span class="cross-why">{c.why}</span></span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="section" aria-label="Results">
+    <div class="wrap">
+      <div class="placeholder"><strong>Placeholder: a {s.short.toLowerCase()} result.</strong> One headline number or a short client story for this service, built node → bond → block.</div>
+    </div>
+  </section>
+
+  <CtaBand heading={`${s.cta}.`} button="Book a free growth check" />
+</Base>
+
+<style>
+  .svc-hero { display: grid; grid-template-columns: 240px 1fr; gap: var(--s12); align-items: start; }
+  .el.big { min-height: 240px; background: var(--block); }
+  .el.big .sym { font-size: 96px; }
+  .el.big:hover { transform: none; }
+  .crumb { text-decoration: none; }
+  .crumb:hover { text-decoration: underline; }
+  .promise { font-size: clamp(24px, 3vw, 32px); line-height: 1.2; }
+  .stage .mol { --mol-ink: var(--outline); }
+  .kpis { margin-top: var(--s4); display: grid; gap: var(--s2); }
+  .kpi-row { display: flex; flex-wrap: wrap; gap: var(--s2); }
+  .tools { color: var(--ink-muted); margin-top: var(--s4); }
+  .cross { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+  .cross-link { display: grid; grid-template-columns: 64px 1fr; gap: var(--s4); align-items: center; padding: var(--s4); border: var(--line-2) solid var(--outline); color: var(--ink); text-decoration: none; background: #fff; transition: background-color .2s ease; }
+  .cross-link:hover { background: var(--bond); }
+  .cross-sym { width: 64px; height: 64px; display: grid; place-items: center; border: var(--line-2) solid var(--outline); background: var(--block); font: 400 28px/1 var(--font-display); }
+  .cross-name { font-weight: 600; }
+  .cross-why { color: var(--ink-muted); font-size: 15.5px; }
+  @media (max-width: 760px) { .svc-hero { grid-template-columns: 1fr; } .el.big { min-height: 160px; max-width: 200px; } .el.big .sym { font-size: 64px; } }
+</style>

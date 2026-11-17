@@ -1,0 +1,23 @@
+---
+interface Props { heading?: string; button?: string; }
+const { heading = 'Start with a conversation.', button = 'Book a free growth check' } = Astro.props;
+---
+<section class="section cta" aria-labelledby="cta-heading">
+  <div class="wrap cta-inner">
+    <div class="stack">
+      <span class="label">Next step</span>
+      <h2 id="cta-heading">{heading}</h2>
+      <p class="lead">A free 30-minute call. Tell us what’s on your mind, and we’ll tell you honestly where we’d look first and whether we can help.</p>
+    </div>
+    <div class="cta-act">
+      <a class="btn btn-primary" href="/book">{button}</a>
+      <span class="mol mol-l" aria-hidden="true"><span class="n" data-stage="node"></span><span class="b"></span><span class="n" data-stage="bond"></span><span class="b"></span><span class="k" data-stage="block"><span class="n"></span><span class="n"></span><span class="n"></span><span class="n"></span></span></span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-inner { display: grid; gap: var(--s8); grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); align-items: end; }
+  .cta-act { display: grid; gap: var(--s8); justify-items: start; }
+  @media (max-width: 760px) { .cta-inner { grid-template-columns: 1fr; } .cta-act .mol { display: none; } }
+</style>

@@ -1,0 +1,132 @@
+---
+// Interactive service map: six service blocks and their 14 cross-bonds.
+// Choosing a service turns it mint (block) and the services it bonds to sky (bond).
+// The list of buttons is the accessible control; the drawing mirrors it.
+import { services, bonds, bondsFor } from '../data/services';
+
+const C = { x: 280, y: 262 };
+const R = 188;
+const order = ['business-assessment', 'growth-strategy', 'customer-retention', 'operations-and-analytics', 'conversion', 'fractional-leadership'];
+const pos: Record<string, { x: number; y: number }> = {};
+order.forEach((slug, i) => {
+  const a = (-90 + i * 60) * (Math.PI / 180);
+  pos[slug] = { x: Math.round(C.x + R * Math.cos(a)), y: Math.round(C.y + R * Math.sin(a)) };
+});
+const H = 44; // half block size
+const seg = (a: { x: number; y: number }, b: { x: number; y: number }) => {
+  const dx = b.x - a.x, dy = b.y - a.y, t = (H + 8) / Math.max(Math.abs(dx), Math.abs(dy));
+  return { x1: a.x + t * dx, y1: a.y + t * dy, x2: b.x - t * dx, y2: b.y - t * dy };
+};
+const bondCount = (slug: string) => bonds.filter((b) => b.a === slug || b.b === slug).length;
+const ordered = order.map((s) => services.find((x) => x.slug === s)!);
+---
+<div class="smap" data-service-map>
+  <div class="smap-draw">
+    <svg viewBox="0 0 560 524" aria-hidden="true" focusable="false">
+      <g class="smap-bonds">
+        {bonds.map((b) => {
+          const s = seg(pos[b.a], pos[b.b]);
+          return <line x1={s.x1} y1={s.y1} x2={s.x2} y2={s.y2} data-a={b.a} data-b={b.b} />;
+        })}
+      </g>
+      {ordered.map((s) => (
+        <g class="smap-block" data-slug={s.slug} transform={`translate(${pos[s.slug].x - H} ${pos[s.slug].y - H})`}>
+          <rect width={H * 2} height={H * 2} />
+          <circle cx="0" cy="0" r="9" /><circle cx={H * 2} cy="0" r="9" /><circle cx="0" cy={H * 2} r="9" /><circle cx={H * 2} cy={H * 2} r="9" />
+          <text x={H} y={H + 4} text-anchor="middle" class="sym">{s.symbol}</text>
+          <text x={H} y={H + 26} text-anchor="middle" class="cnt">{bondCount(s.slug)} bonds</text>
+        </g>
+      ))}
+    </svg>
+  </div>
+
+  <div class="smap-side">
+    <div class="smap-tabs" role="tablist" aria-label="Services">
+      {ordered.map((s, i) => (
+        <button type="button" role="tab" id={`tab-${s.slug}`} aria-controls={`panel-${s.slug}`}
+          aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1} data-slug={s.slug}>
+          <span class="sym">{s.symbol}</span>{s.short}
+        </button>
+      ))}
+    </div>
+    {ordered.map((s, i) => (
+      <div class="smap-panel" role="tabpanel" id={`panel-${s.slug}`} aria-labelledby={`tab-${s.slug}`} hidden={i !== 0}>
+        <h3>{s.name}</h3>
+        <p class="smap-promise">{s.promise}</p>
+        <span class="label">Bonds to</span>
+        <ul>
+          {bondsFor(s.slug).map((b) => (
+            <li><a href={`/services/${b.other.slug}`}>{b.other.short}</a>: {b.why}</li>
+          ))}
+        </ul>
+        <a class="btn btn-ghost btn-sm" href={`/services/${s.slug}`}>Explore {s.short.toLowerCase()}</a>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .smap { display: grid; gap: var(--s8); grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; }
+  @media (max-width: 860px) { .smap { grid-template-columns: 1fr; } }
+  .smap-draw svg { width: 100%; height: auto; overflow: visible; }
+  .smap-bonds line { stroke: var(--line); stroke-width: 2; stroke-linecap: round; transition: stroke .25s ease; }
+  .smap-bonds line.on { stroke: var(--outline); }
+  .smap-block { cursor: pointer; }
+  .smap-block rect, .smap-block circle { fill: #fff; stroke: var(--outline); stroke-width: 2; transition: fill .3s ease; }
+  .smap-block.linked rect, .smap-block.linked circle { fill: var(--bond); }
+  .smap-block.active rect, .smap-block.active circle { fill: var(--block); }
+  .smap-block .sym { font: 400 32px/1 var(--font-display); font-variation-settings: "SOFT" 50, "opsz" 96; fill: var(--ink); }
+  .smap-block .cnt { font: 500 11px/1 var(--font-mono); letter-spacing: .06em; fill: var(--ink-muted); text-transform: uppercase; }
+  .smap-tabs { display: flex; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s6); }
+  .smap-tabs button { display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--font-text); color: var(--ink); background: #fff; border: var(--line-2) solid var(--line-strong); border-radius: 999px; padding: 9px 14px; cursor: pointer; }
+  .smap-tabs button .sym { font: 400 16px/1 var(--font-display); }
+  .smap-tabs button[aria-selected="true"] { background: var(--block); border-color: var(--outline); }
+  .smap-panel { display: grid; gap: var(--s3); }
+  .smap-panel[hidden] { display: none; }
+  .smap-promise { color: var(--ink-muted); font-size: 18px; }
+  .smap-panel ul { margin: 0 0 var(--s3); padding: 0; list-style: none; display: grid; gap: var(--s3); }
+  .smap-panel li { padding-left: 22px; position: relative; font-size: 15.5px; line-height: 1.5; }
+  .smap-panel li::before { content: ""; position: absolute; left: 0; top: 7px; width: 10px; height: 10px; border-radius: 50%; background: var(--bond); border: 1.5px solid var(--outline); }
+  .smap-panel .btn { justify-self: start; }
+  @media (prefers-reduced-motion: reduce) { .smap-bonds line, .smap-block rect, .smap-block circle { transition: none; } }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-service-map]').forEach((root) => {
+    const tabs = Array.from(root.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
+    const lines = Array.from(root.querySelectorAll<SVGLineElement>('.smap-bonds line'));
+    const blocks = Array.from(root.querySelectorAll<SVGGElement>('.smap-block'));
+    const select = (slug: string, focus = false) => {
+      const linked = new Set<string>();
+      lines.forEach((l) => {
+        const on = l.dataset.a === slug || l.dataset.b === slug;
+        l.classList.toggle('on', on);
+        if (on) linked.add(l.dataset.a === slug ? l.dataset.b! : l.dataset.a!);
+      });
+      blocks.forEach((b) => {
+        b.classList.toggle('active', b.dataset.slug === slug);
+        b.classList.toggle('linked', linked.has(b.dataset.slug!));
+      });
+      tabs.forEach((t) => {
+        const on = t.dataset.slug === slug;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = root.querySelector<HTMLElement>(`#panel-${t.dataset.slug}`);
+        if (panel) panel.hidden = !on;
+        if (on && focus) t.focus();
+      });
+    };
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t.dataset.slug!));
+      t.addEventListener('keydown', (e) => {
+        const step = e.key === 'ArrowRight' || e.key === 'ArrowDown' ? 1 : e.key === 'ArrowLeft' || e.key === 'ArrowUp' ? -1 : 0;
+        if (!step) return;
+        e.preventDefault();
+        const next = tabs[(i + step + tabs.length) % tabs.length];
+        select(next.dataset.slug!, true);
+      });
+    });
+    blocks.forEach((b) => b.addEventListener('click', () => select(b.dataset.slug!)));
+    select(tabs[0].dataset.slug!);
+  });
+</script>

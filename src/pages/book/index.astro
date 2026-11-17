@@ -1,0 +1,51 @@
+---
+import Base from '../../layouts/Base.astro';
+---
+<Base title="Book a growth check" description="Book a free 30-minute growth check with compound. Tell us what's on your mind and we'll tell you where we'd look first.">
+  <section class="section">
+    <div class="wrap book">
+      <div class="stack-l">
+        <span class="label">Book a growth check</span>
+        <h1>Start with a conversation<span class="dot">.</span></h1>
+        <p class="lead">A free 30-minute call. No pitch deck.</p>
+        <ol class="steps">
+          <li data-stage="node"><strong>You tell us</strong> what’s on your mind: growth, margin, customers, a new market, a gap in the team.</li>
+          <li data-stage="bond"><strong>We ask the questions</strong> an outsider would, and connect what we hear.</li>
+          <li data-stage="block"><strong>You get a short follow-up</strong> with where we’d look first, and whether we can help.</li>
+        </ol>
+        <div class="placeholder"><strong>Placeholder: booking calendar.</strong> A Cal.com or Calendly embed goes here so people can pick a time directly.</div>
+      </div>
+
+      <form class="panel form" name="growth-check" method="POST" action="/book/thanks" data-netlify="true" netlify-honeypot="company-url">
+        <input type="hidden" name="form-name" value="growth-check" />
+        <p class="sr-only"><label>Leave this empty: <input name="company-url" /></label></p>
+        <h2 class="h3">Or send us a note</h2>
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" autocomplete="name" required /></div>
+        <div class="field"><label for="f-email">Work email</label><input id="f-email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="f-company">Company</label><input id="f-company" name="company" autocomplete="organization" required /></div>
+        <div class="field"><label for="f-site">Website</label><input id="f-site" name="website" type="url" placeholder="https://" /></div>
+        <div class="field">
+          <label for="f-rev">Annual online revenue</label>
+          <select id="f-rev" name="revenue">
+            <option value="">Choose a range</option>
+            <option>Under £1m</option><option>£1m to £5m</option><option>£5m to £20m</option><option>£20m to £50m</option><option>Over £50m</option>
+          </select>
+        </div>
+        <div class="field"><label for="f-msg">What’s on your mind?</label><textarea id="f-msg" name="message" rows="5"></textarea></div>
+        <button class="btn btn-primary" type="submit">Send</button>
+        <p class="hint">We’ll reply within one working day. See our <a href="/privacy">privacy notice</a> for how we use your details.</p>
+      </form>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .book { display: grid; gap: var(--s12); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+  @media (max-width: 860px) { .book { grid-template-columns: 1fr; } }
+  .steps { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); }
+  .steps li { padding-left: 34px; position: relative; }
+  .steps li::before { content: ""; position: absolute; left: 0; top: 4px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--outline); background: var(--mol-fill); }
+  .steps li[data-stage="block"]::before { border-radius: 0; }
+  .form { display: grid; gap: var(--s4); }
+  .hint { font-size: 14px; color: var(--ink-muted); }
+</style>
