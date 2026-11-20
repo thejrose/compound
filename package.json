@@ -3,11 +3,13 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview"
+    "build": "node build/build.mjs",
+    "preview": "npx --yes serve@14.2.4 dist"
   },
   "dependencies": {
-    "astro": "7.4.12"
+    "linkedom": "0.18.12"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }

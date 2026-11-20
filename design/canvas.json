@@ -1,0 +1,334 @@
+{
+  "v": 3,
+  "attachments": {},
+  "boards": {
+    "Main.dc.html": {
+      "expand": "fill",
+      "h": 7650,
+      "title": "Homepage",
+      "w": 1440,
+      "x": 0,
+      "y": 0
+    },
+    "Service.dc.html": {
+      "expand": "fill",
+      "h": 4450,
+      "title": "Service · Customer retention",
+      "w": 1440,
+      "x": 1520,
+      "y": 0
+    },
+    "Approach.dc.html": {
+      "expand": "fill",
+      "h": 4000,
+      "title": "Approach",
+      "w": 1440,
+      "x": 3040,
+      "y": 0
+    },
+    "Services.dc.html": {
+      "expand": "fill",
+      "h": 5900,
+      "title": "Services hub",
+      "w": 1440,
+      "x": 4560,
+      "y": 0,
+      "is_interactive": true
+    },
+    "About.dc.html": {
+      "expand": "fill",
+      "h": 4050,
+      "title": "About",
+      "w": 1440,
+      "x": 6080,
+      "y": 0
+    },
+    "Book.dc.html": {
+      "expand": "fill",
+      "h": 1850,
+      "title": "Request a growth check",
+      "w": 1440,
+      "x": 7600,
+      "y": 0,
+      "is_interactive": true
+    },
+    "Thanks.dc.html": {
+      "expand": "fill",
+      "h": 1350,
+      "title": "Thank you",
+      "w": 1440,
+      "x": 9120,
+      "y": 0
+    },
+    "Service-Ba.dc.html": {
+      "expand": "fill",
+      "h": 4450,
+      "title": "Service · Business assessment",
+      "w": 1440,
+      "x": 0,
+      "y": 10200
+    },
+    "Service-Gs.dc.html": {
+      "expand": "fill",
+      "h": 4400,
+      "title": "Service · Growth strategy",
+      "w": 1440,
+      "x": 1520,
+      "y": 10200
+    },
+    "Service-Cr.dc.html": {
+      "expand": "fill",
+      "h": 4450,
+      "title": "Service · Conversion",
+      "w": 1440,
+      "x": 3040,
+      "y": 10200
+    },
+    "Service-Op.dc.html": {
+      "expand": "fill",
+      "h": 4500,
+      "title": "Service · Reporting & analytics",
+      "w": 1440,
+      "x": 4560,
+      "y": 10200
+    },
+    "Service-Fl.dc.html": {
+      "expand": "fill",
+      "h": 4900,
+      "title": "Service · Fractional leadership",
+      "w": 1440,
+      "x": 6080,
+      "y": 10200
+    },
+    "M-Main.dc.html": {
+      "h": 9900,
+      "title": "Mobile · Homepage",
+      "w": 390,
+      "x": 0,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Services.dc.html": {
+      "h": 8150,
+      "title": "Mobile · Services hub",
+      "w": 390,
+      "x": 470,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Approach.dc.html": {
+      "h": 5500,
+      "title": "Mobile · Approach",
+      "w": 390,
+      "x": 940,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-About.dc.html": {
+      "h": 5600,
+      "title": "Mobile · About",
+      "w": 390,
+      "x": 1410,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Book.dc.html": {
+      "h": 3250,
+      "title": "Mobile · Request a growth check",
+      "w": 390,
+      "x": 1880,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Thanks.dc.html": {
+      "h": 1650,
+      "title": "Mobile · Thank you",
+      "w": 390,
+      "x": 2350,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service-Ba.dc.html": {
+      "h": 5750,
+      "title": "Mobile · Service · Business assessment",
+      "w": 390,
+      "x": 2820,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service-Gs.dc.html": {
+      "h": 5700,
+      "title": "Mobile · Service · Growth strategy",
+      "w": 390,
+      "x": 3290,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service-Cr.dc.html": {
+      "h": 5750,
+      "title": "Mobile · Service · Conversion",
+      "w": 390,
+      "x": 3760,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service.dc.html": {
+      "h": 5750,
+      "title": "Mobile · Service · Customer retention",
+      "w": 390,
+      "x": 4230,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service-Op.dc.html": {
+      "h": 5800,
+      "title": "Mobile · Service · Reporting & analytics",
+      "w": 390,
+      "x": 4700,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-Service-Fl.dc.html": {
+      "h": 6800,
+      "title": "Mobile · Service · Fractional leadership",
+      "w": 390,
+      "x": 5170,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "M-ServiceMap.dc.html": {
+      "h": 1100,
+      "title": "Mobile · Asset · Service map",
+      "w": 390,
+      "x": 6160,
+      "y": 15800,
+      "is_interactive": true
+    },
+    "Anim-Build.dc.html": {
+      "h": 860,
+      "title": "Animation · node › bond › block (scroll to build)",
+      "w": 1440,
+      "x": 11920,
+      "y": 0,
+      "is_interactive": true
+    },
+    "ServiceMap.dc.html": {
+      "h": 1050,
+      "w": 1440,
+      "x": 13440,
+      "y": 0,
+      "title": "Asset · Service map (interactive)",
+      "is_interactive": true
+    }
+  },
+  "createdOnFiles": {
+    "at": "2026-11-18T09:00:00Z",
+    "v": 1
+  },
+  "designSystems": [
+    {
+      "artifact": "https://claude.ai/artifact/9mGCGtWBhEZC62z6kMkUc7",
+      "copiedAt": "2026-11-18T09:00:00Z",
+      "namespace": "compound",
+      "title": "compound.",
+      "version": null
+    }
+  ],
+  "launch": {
+    "view": "canvas"
+  },
+  "noteOrder": [
+    "title",
+    "brief",
+    "note-ycdf8e",
+    "mobile-title",
+    "v4-changes",
+    "v4-todo",
+    "v4-mobile"
+  ],
+  "notes": {
+    "brief": {
+      "text": "Brief\n\n• White content, soft sky tint sections, ink CTA + footer\n• Fraunces headlines, Instrument Sans body, Plex Mono labels\n• node › bond › block as a refined accent: small markers, fine-line icons\n• Imagery = example data visuals of the diagnostic, always labelled\n• Dashed boxes = placeholders for real results, photos, bio",
+      "w": 360,
+      "x": 10640,
+      "y": 0
+    },
+    "mobile-title": {
+      "kind": "title1",
+      "maxW": 5560,
+      "text": "Mobile views · 390px · tap the menu, map and swipe rows in Play",
+      "w": 240,
+      "x": 0,
+      "y": 15480
+    },
+    "note-ycdf8e": {
+      "text": "Operations needs more definition. \nReporting & Analytics focus?",
+      "w": 240,
+      "x": 5007,
+      "y": 10010
+    },
+    "title": {
+      "kind": "title1",
+      "maxW": 8000,
+      "text": "compound. website · v4 desktop + mobile",
+      "w": 240,
+      "x": 0,
+      "y": -320
+    },
+    "v4-changes": {
+      "x": 10640,
+      "y": 620,
+      "w": 560,
+      "fill": "teal",
+      "size": "s",
+      "text": "v4 · WHAT CHANGED (19 Nov, from review 2)\n\n• Desktop and mobile are now built from the same source, so copy and components can't drift apart again.\n• Home: new headline carried through (problem, results, CTA). New 'Why compound.' section: three one-line contrasts. 'Why it works' is one line introducing How we work. Hero card label is now 'Example finding'.\n• Principles on Home and About only. Approach links to them, Step 4 trimmed, step labels match ('01 · node.').\n• Services hub: hero card removed (the map does that job). Map group labels raised to 11px.\n• About: founder straight after the hero, with logos inside it. 'Why the name' folded into the definition card.\n• Request page: 'Free growth check' up top, plus 'You'll speak to [NAME]'.\n• Service pages rebuilt on one template: service-specific evidence headings, plain-English chips, neutral tiles, matching cards and buttons, chart labels fixed, proper case-study block.\n• Mobile: one spacing rhythm (64px sections, 48px hero top), principles and pairings stacked, only the homepage services swipe, two-column footer.\n• Frame heights measured by rendering each page."
+    },
+    "v4-todo": {
+      "x": 11280,
+      "y": 0,
+      "w": 520,
+      "fill": "orange",
+      "size": "s",
+      "text": "STILL NEEDED FROM YOU (updated 20 Nov)\n\nDone: founder name (James Rose), brands worked with (Yankee Candle, Nisbets, Oak Furnitureland, Lovehoney), reply time (one working day), pricing and length removed (‘shaped around you’), £500k–£10m removed.\n\n• Founder: portrait, story, LinkedIn, location, and the two stats ([XX] years, £[XX]m).\n• Proof: TBC, no clients yet. Results, testimonial and case-study blocks are still placeholders, so decide whether to hide them at launch.\n• Email address and company number.\n• Optional: calendar embed on the Thank-you page; use the Anim-Build animation somewhere."
+    },
+    "v4-mobile": {
+      "x": 5640,
+      "y": 15800,
+      "w": 440,
+      "fill": "teal",
+      "size": "s",
+      "text": "MOBILE · v4\n\nGenerated from the same source as desktop, so every change lands on both. One spacing rhythm, stacked principles and pairings, a swipe row only for the homepage services, and a two-column footer. The Services hub embeds the phone-sized map (Mobile · Asset · Service map)."
+    }
+  },
+  "order": [
+    "Main.dc.html",
+    "Service.dc.html",
+    "Approach.dc.html",
+    "Services.dc.html",
+    "About.dc.html",
+    "Book.dc.html",
+    "Thanks.dc.html",
+    "Service-Ba.dc.html",
+    "Service-Gs.dc.html",
+    "Service-Cr.dc.html",
+    "Service-Op.dc.html",
+    "Service-Fl.dc.html",
+    "M-Main.dc.html",
+    "M-Services.dc.html",
+    "M-Approach.dc.html",
+    "M-About.dc.html",
+    "M-Book.dc.html",
+    "M-Thanks.dc.html",
+    "M-Service-Ba.dc.html",
+    "M-Service-Gs.dc.html",
+    "M-Service-Cr.dc.html",
+    "M-Service.dc.html",
+    "M-Service-Op.dc.html",
+    "M-Service-Fl.dc.html",
+    "Anim-Build.dc.html",
+    "ServiceMap.dc.html",
+    "M-ServiceMap.dc.html"
+  ],
+  "pages": [],
+  "title": "compound. Website designs"
+}
