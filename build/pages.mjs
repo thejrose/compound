@@ -1,5 +1,6 @@
 // Routes, titles and descriptions for each page built from the canvas.
 export const SITE = 'https://compoundconsultancy.com';
+export const GA_ID = 'G-E6NLDBYN60'; // Google Analytics 4 (loads only after cookie consent)
 
 // canvas file name (desktop) → URL
 export const ROUTE = {
@@ -47,23 +48,26 @@ export const LEGAL = [
   { path: '/privacy/', title: 'Privacy notice · compound.', description: 'How compound. collects and uses personal data.', body: legalSection('Privacy notice', '[DATE]', `
     <p>This notice explains how [LEGAL COMPANY NAME] (“compound.”, “we”), company number [COMPANY NUMBER], registered at [ADDRESS], uses personal data when you visit this website or contact us. We are the data controller.</p>
     <h2>What we collect</h2>
-    <ul><li>Details you send us through the growth check form: your name, work email, website, revenue range, role, the services you’re interested in and your message.</li><li>Basic technical data our host needs to run the site securely, such as IP addresses in server logs.</li></ul>
+    <ul><li>Details you send us through the growth check form: your name, work email, website, revenue range, role, the services you’re interested in and your message.</li><li>Basic technical data our host needs to run the site securely, such as IP addresses in server logs.</li><li>If you accept analytics cookies, information about how you use the site, collected by Google Analytics (see our <a href="/cookies/">cookie policy</a>).</li></ul>
     <h2>Why we use it</h2>
-    <ul><li>To reply to your enquiry and arrange a call (our legitimate interest in responding to you).</li><li>To deliver services if you become a client (to perform our contract).</li></ul>
+    <ul><li>To reply to your enquiry and arrange a call (our legitimate interest in responding to you).</li><li>To deliver services if you become a client (to perform our contract).</li><li>To understand how the website is used and improve it, only with your consent.</li></ul>
     <h2>Who we share it with</h2>
-    <p>Our website host and form provider (Netlify) and our email provider [PROVIDER]. They process data on our instructions. Some may store data outside the UK under approved safeguards.</p>
+    <p>Our website host and form provider (Netlify), Google (for analytics, only if you accept) and our email provider [PROVIDER]. They process data on our instructions. Some may store data outside the UK under approved safeguards.</p>
     <h2>Client data in our work</h2>
     <p>When we analyse a client’s business data, we work under a data processing agreement with that client. Customer data is pseudonymised before analysis and deleted or returned when the engagement ends.</p>
     <h2>How long we keep it</h2>
     <p>Enquiries we don’t take forward are deleted after 12 months. Client records are kept for 6 years for legal and accounting reasons.</p>
     <h2>Your rights</h2>
     <p>You can ask to see, correct or delete your data, or object to how we use it, by emailing [HELLO@DOMAIN]. You can also complain to the Information Commissioner’s Office at ico.org.uk.</p>`) },
-  { path: '/cookies/', title: 'Cookie policy · compound.', description: 'The cookies compound. uses.', body: legalSection('Cookie policy', '[DATE]', `
-    <p>This website doesn’t use analytics, advertising or tracking cookies, and our fonts are hosted on our own site, so no third-party requests are made when you browse.</p>
+  { path: '/cookies/', title: 'Cookie policy · compound.', description: 'The cookies compound. uses and how to control them.', body: legalSection('Cookie policy', '[DATE]', `
+    <p>We use as few cookies as possible, and we only set analytics cookies if you say yes.</p>
     <h2>Strictly necessary</h2>
-    <p>Our host may use technical cookies or similar storage to run the site and protect the growth check form from spam. These don’t need your consent.</p>
-    <h2>If this changes</h2>
-    <p>If we add analytics in future, we’ll update this page and ask for your consent before setting any non-essential cookies.</p>`) },
+    <p>Our host (Netlify) may use technical storage to run the site and protect the growth check form from spam. We also remember your cookie choice in your browser, so we don’t ask again on every page. These don’t need your consent.</p>
+    <h2>Analytics (only with your consent)</h2>
+    <p>If you accept, we use Google Analytics 4 to understand which pages are useful and how people find us. It sets cookies named <code>_ga</code> and <code>_ga_*</code>, which last up to 2 years. Google processes this data on our behalf, and IP addresses are not stored. We don’t use advertising or remarketing cookies.</p>
+    <h2>Changing your mind</h2>
+    <p>You can change your choice at any time. If you withdraw consent, we stop loading Google Analytics and remove its cookies from this site.</p>
+    <p><button type="button" data-cookie-settings style="min-height: 44px; padding: 12px 22px; border-radius: 999px; border: 1px solid #172033; background: #172033; color: #FFFFFF; font: 600 15px/1 'Instrument Sans', Arial, sans-serif; cursor: pointer;">Change cookie settings</button></p>`) },
   { path: '/terms/', title: 'Website terms · compound.', description: 'Terms of use for the compound. website.', body: legalSection('Website terms', '[DATE]', `
     <p>This website is run by [LEGAL COMPANY NAME], company number [COMPANY NUMBER], registered at [ADDRESS]. By using it you accept these terms.</p>
     <h2>Using the site</h2>

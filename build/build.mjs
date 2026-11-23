@@ -9,7 +9,7 @@ import path from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { parseHTML } from 'linkedom';
-import { PAGES, ROUTE, LEGAL, NOT_FOUND, SITE } from './pages.mjs';
+import { PAGES, ROUTE, LEGAL, NOT_FOUND, SITE, GA_ID } from './pages.mjs';
 
 const require = createRequire(import.meta.url);
 const DC = require('./dc.cjs');
@@ -29,6 +29,14 @@ const FONT_CSS = `@font-face{font-family:"Fraunces";src:url("/fonts/Fraunces-100
 @font-face{font-family:"Instrument Sans";src:url("/fonts/InstrumentSans-400-700.woff2") format("woff2");font-weight:400 700;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url("/fonts/IBMPlexMono-400.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"IBM Plex Mono";src:url("/fonts/IBMPlexMono-500.woff2") format("woff2");font-weight:500;font-display:swap}`;
+
+const CONSENT_CSS = `.cp-consent{position:fixed;left:16px;right:16px;bottom:16px;z-index:100;max-width:720px;margin:0 auto;box-sizing:border-box;display:flex;flex-wrap:wrap;gap:16px 24px;align-items:center;justify-content:space-between;padding:18px 20px;background:#172033;color:#F2F4F7;border-radius:16px;box-shadow:0 12px 40px rgba(23,32,51,.28);font:400 15px/1.55 'Instrument Sans',Arial,sans-serif;animation:cpFadeA .35s ease both}
+.cp-consent__text{margin:0;flex:1 1 320px}.cp-consent__text b{font-weight:600}.cp-consent a{color:#A9C8FF}.cp-consent a:hover{color:#FFFFFF}
+.cp-consent__actions{display:flex;gap:10px;flex:none}
+.cp-consent__btn{min-height:44px;padding:10px 20px;border-radius:999px;border:1px solid #FFFFFF;background:#FFFFFF;color:#172033;font:600 15px/1 'Instrument Sans',Arial,sans-serif;cursor:pointer}
+.cp-consent__btn--ghost{background:transparent;color:#F2F4F7;border-color:#5B6680}
+.cp-consent__btn:focus-visible{outline:2px solid #A9C8FF;outline-offset:3px}
+@keyframes cpFadeA{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}`;
 
 const read = (f) => fs.readFileSync(path.join(DESIGN, f), 'utf8');
 
@@ -128,7 +136,8 @@ function dedupeCss(blocks) {
 function assemble(meta, desktop, mobile) {
   const css = [FONT_CSS, dedupeCss([...desktop.styles, ...mobile.styles]),
     `html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}body{margin:0;background:#FFFFFF}`,
-    `.dc-m{display:none}@media (max-width:${BREAKPOINT}px){.dc-d{display:none}.dc-m{display:block}}`].join('\n');
+    `.dc-m{display:none}@media (max-width:${BREAKPOINT}px){.dc-d{display:none}.dc-m{display:block}}`,
+    CONSENT_CSS].join('\n');
   const variant = (v, key) => {
     const attrs = v.interactive ? ` data-dc-def="def-${key}" data-dc-tpl="tpl-${key}"` : '';
     return `<div class="dc-${key}"${attrs}>${v.html}</div>`;
@@ -138,7 +147,7 @@ function assemble(meta, desktop, mobile) {
   const needsJs = desktop.interactive || mobile.interactive;
   const title = meta.title;
   return `<!doctype html>
-<html lang="en-GB">
+<html lang="en-GB"${GA_ID ? ` data-ga-id="${GA_ID}"` : ''}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -162,7 +171,7 @@ ${css}
 ${variant(desktop, 'd')}
 ${variant(mobile, 'm')}
 ${defs}
-${needsJs ? '<script src="/assets/dc.js" defer></script>\n<script src="/assets/boot.js" defer></script>' : ''}
+${needsJs ? '<script src="/assets/dc.js" defer></script>\n<script src="/assets/boot.js" defer></script>\n' : ''}<script src="/assets/consent.js" defer></script>
 </body>
 </html>
 `;
@@ -190,6 +199,7 @@ fs.cpSync(PUBLIC, DIST, { recursive: true });
 fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true });
 fs.copyFileSync(path.join(ROOT, 'build', 'dc.cjs'), path.join(DIST, 'assets', 'dc.js'));
 fs.copyFileSync(path.join(ROOT, 'build', 'boot.js'), path.join(DIST, 'assets', 'boot.js'));
+fs.copyFileSync(path.join(ROOT, 'build', 'consent.js'), path.join(DIST, 'assets', 'consent.js'));
 
 const sitemap = [];
 for (const p of PAGES) {
