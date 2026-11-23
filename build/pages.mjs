@@ -1,5 +1,5 @@
 // Routes, titles and descriptions for each page built from the canvas.
-export const SITE = process.env.URL || 'https://compound-website.netlify.app';
+export const SITE = 'https://compoundconsultancy.com';
 
 // canvas file name (desktop) → URL
 export const ROUTE = {
